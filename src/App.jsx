@@ -2,15 +2,26 @@ import "./style.css";
 import { useState } from "react";
 
 export default function App() {
-  const [Checked, setChecked] = useState(false);
   const [newItem, setNewItem] = useState("");
+  const [todo, setToDo] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleChange = () => {
-    setChecked(!Checked);
-  };
+  function toggleTodo(event) {
+    setIsChecked(event.target.checked);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setToDo((current) => {
+      return [...current, { id: crypto.randomUUID(), title: newItem }];
+    });
+
+    setNewItem("");
+  }
   return (
     <div>
-      <form className="new-item-form">
+      <form className="new-item-form" onSubmit={handleSubmit}>
         <div className="form-row">
           <label htmlFor="item">New Item</label>
           <input
@@ -24,19 +35,22 @@ export default function App() {
       </form>
       <h1 className="header">To Do List</h1>
       <ul>
-        <li>
-          <label htmlFor="Item1">
-            <input type="checkbox" checked={Checked} onChange={handleChange} />
-            Item 1
-          </label>
-          <button className="btn btn-danger">Delete</button>
-          <br />
-          <label htmlFor="Item2">
-            <input type="checkbox" />
-            Item 2
-          </label>
-          <button className="btn btn-danger">Delete</button>
-        </li>
+        {todo.map((t) => {
+          return (
+            <li key={t.id}>
+              <label htmlFor="Item1">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={toggleTodo}
+                />
+                {t.title}
+              </label>
+              <button className="btn btn-danger">Delete</button>
+              <br />
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
