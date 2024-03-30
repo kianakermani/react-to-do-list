@@ -65,14 +65,17 @@ export default function App() {
         {todo.map((t) => {
           return (
             <li key={t.id}>
-              <label htmlFor="Item1">
-                <input type="checkbox" onChange={toggleTodo} />
-
-                {t.title}
-              </label>
-              <button onClick={() => Delete(t.id)} className="btn btn-danger">
-                Delete
-              </button>
+              <div>
+                <label htmlFor="Item1">
+                  <input type="checkbox" onChange={toggleTodo} />
+                  {t.title}
+                </label>
+              </div>
+              <div>
+                <button onClick={() => Delete(t.id)} className="btn btn-danger">
+                  Delete
+                </button>
+              </div>
               <br />
             </li>
           );
