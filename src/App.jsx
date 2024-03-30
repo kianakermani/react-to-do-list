@@ -4,10 +4,24 @@ import { useState } from "react";
 export default function App() {
   const [newItem, setNewItem] = useState("");
   const [todo, setToDo] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
 
-  function toggleTodo(event) {
-    setIsChecked(event.target.checked);
+  function toggleTodo(e) {
+    const { value, checked } = e.target;
+    const { id } = todo;
+    // Case 1 : The user checks the box
+    if (checked) {
+      setToDo({
+        id: [...id, value],
+        title: [...id, value],
+      });
+    }
+    // Case 2  : The user unchecks the box
+    else {
+      setToDo({
+        id: id.filter((e) => e !== value),
+        title: id.filter((e) => e !== value),
+      });
+    }
   }
 
   function handleSubmit(e) {
@@ -39,11 +53,7 @@ export default function App() {
           return (
             <li key={t.id}>
               <label htmlFor="Item1">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={toggleTodo}
-                />
+                <input type="checkbox" onChange={toggleTodo} />
                 {t.title}
               </label>
               <button className="btn btn-danger">Delete</button>
