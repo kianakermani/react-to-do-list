@@ -66,7 +66,7 @@ export default function App() {
           return (
             <li key={t.id}>
               <div>
-                <label htmlFor="Item1">
+                <label htmlFor="Item1" className="title">
                   <input type="checkbox" onChange={toggleTodo} />
                   {t.title}
                 </label>
