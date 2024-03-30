@@ -24,12 +24,21 @@ export default function App() {
     }
   }
 
+  function Delete(id) {
+    setToDo((current) => {
+      return current.filter((t) => t.id !== id);
+    });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-
-    setToDo((current) => {
-      return [...current, { id: crypto.randomUUID(), title: newItem }];
-    });
+    if (newItem.length > 0) {
+      setToDo((current) => {
+        return [...current, { id: crypto.randomUUID(), title: newItem }];
+      });
+    } else {
+      alert("Please Fill Input !");
+    }
 
     setNewItem("");
   }
@@ -40,23 +49,30 @@ export default function App() {
           <label htmlFor="item">New Item</label>
           <input
             type="text"
-            value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
             id="item"
+            value={newItem}
+            placeholder="Write Your Todo"
+            autoComplete="off"
           />
         </div>
         <button className="btn">Add</button>
       </form>
       <h1 className="header">To Do List</h1>
       <ul>
+        {todo.length === 0 && "No Todos"}
+
         {todo.map((t) => {
           return (
             <li key={t.id}>
               <label htmlFor="Item1">
                 <input type="checkbox" onChange={toggleTodo} />
+
                 {t.title}
               </label>
-              <button className="btn btn-danger">Delete</button>
+              <button onClick={() => Delete(t.id)} className="btn btn-danger">
+                Delete
+              </button>
               <br />
             </li>
           );
