@@ -1,9 +1,18 @@
 import "./style.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [newItem, setNewItem] = useState("");
-  const [todo, setToDo] = useState([]);
+  const [todo, setToDo] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS");
+    if (localValue == null) return [];
+
+    return JSON.parse(localValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(todo));
+  }, [todo]);
 
   function toggleTodo(e) {
     const { value, checked } = e.target;
