@@ -24,32 +24,33 @@ body {
 }
 
 .btn {
-  background: hsla(200, 100%, 51%, 0.1);
-  border: 1px solid hsl(200, 98%, 33%);
-  color: hsl(200, 87%, 45%);
-  padding: 0.5em 0.5em;
-  border-radius: 0.25em;
+  padding: 8px;
   cursor: pointer;
-  outline: none;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
 }
 
-.btn:hover,
-.btn:focus-visible {
-  background: hsl(200, 100%, 50%, 0.2);
+.btn:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
 }
 
-.btn.btn-danger {
-  background: hsla(0, 60%, 39%, 0.2);
-  border: 1px solid hsl(0, 100%, 40%);
-  color: hsl(0, 100%, 40%);
-  position: relative;
-  right: -250px;
-  top: -25px;
+.btn-danger {
+  background-color: crimson;
 }
 
-.btn.btn-danger:hover,
-.btn.btn-danger:focus-visible {
-  background: hsla(0, 67%, 35%, 0.4);
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0;
+  border-bottom: 1px solid #f5a8a8;
 }
 
 .new-item-form input {
@@ -77,4 +78,8 @@ ul {
 
 .title {
   font-size: larger;
+}
+
+.title > span {
+  padding: 0 5px;
 }
